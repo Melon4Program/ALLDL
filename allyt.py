@@ -60,7 +60,7 @@ def progress_hook(d):
     elif d['status'] == 'finished':
         sys.stdout.write('\n')
 
-def download_video(url, save_path, format_code, live_from_start):
+def download_video(url, save_path, format_code):
     """Downloads a video from a given URL."""
     logging.info(f"Starting video download for format '{format_code}'...")
     try:
@@ -71,9 +71,6 @@ def download_video(url, save_path, format_code, live_from_start):
             'no_warnings': True,
             'progress_hooks': [progress_hook],
         }
-        if live_from_start:
-            logging.info("Livestream detected. Attempting to download from the beginning.")
-            ydl_opts['live_from_start'] = True
         with yt_dlp.YoutubeDL(ydl_opts) as ydl:
             ydl.download([url])
         logging.info(f"Video download finished for format '{format_code}'.")
@@ -235,7 +232,6 @@ def main():
     parser.add_argument("--video", action="store_true", help="Download video")
     parser.add_argument("--subtitle", action="store_true", help="Download subtitle")
     parser.add_argument("--thumbnail", action="store_true", help="Download thumbnail")
-    parser.add_argument("--live-from-start", action="store_true", help="Download livestream from the beginning")
     parser.add_argument("--list-formats", action="store_true", help="List available video formats")
     parser.add_argument("--list-subs", action="store_true", help="List available subtitles")
     parser.add_argument("--save-dir", default=os.getcwd(), help="Directory to save files")
@@ -269,12 +265,12 @@ def main():
 
     if args.video:
         if args.format:
-            download_video(args.url, save_path, args.format, args.live_from_start)
+            download_video(args.url, save_path, args.format)
         else:
             selected_formats = interactive_format_selection(args.url)
             if selected_formats:
                 for format_code in selected_formats:
-                    download_video(args.url, save_path, format_code, args.live_from_start)
+                    download_video(args.url, save_path, format_code)
             else:
                 logging.warning("No formats selected. Skipping video download.")
 
