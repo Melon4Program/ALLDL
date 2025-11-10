@@ -225,16 +225,92 @@ def list_subtitles(url):
     except Exception as e:
         logging.error(f"Error listing subtitles: {e}")
 
+def download_playlist(url, save_path):
+    """Handles the playlist download workflow."""
+    logging.info("Fetching playlist videos...")
+    try:
+        ydl_opts = {'extract_flat': True, 'quiet': True}
+        with yt_dlp.YoutubeDL(ydl_opts) as ydl:
+            playlist_dict = ydl.extract_info(url, download=False)
+            entries = playlist_dict.get('entries', [])
+
+        if not entries:
+            logging.error("No videos found in the playlist.")
+            return
+
+        print("\nAvailable videos in the playlist:")
+        for i, entry in enumerate(entries):
+            print(f"  [{i+1}] {entry['title']}")
+
+        while True:
+            try:
+                choice_str = input(f"\nEnter video numbers to download (e.g., 1-5,8,10), '0' for all, or 'q' to quit: ")
+                if choice_str.lower() == 'q':
+                    return
+
+                if choice_str.strip() == '0':
+                    selected_indices = range(len(entries))
+                    break
+
+                selected_indices = set()
+                parts = choice_str.split(',')
+                for part in parts:
+                    part = part.strip()
+                    if '-' in part:
+                        start, end = map(int, part.split('-'))
+                        for i in range(start, end + 1):
+                            if 1 <= i <= len(entries):
+                                selected_indices.add(i - 1)
+                    else:
+                        index = int(part)
+                        if 1 <= index <= len(entries):
+                            selected_indices.add(index - 1)
+                
+                if not selected_indices:
+                    raise ValueError
+
+                selected_indices = sorted(list(selected_indices))
+                break
+            except (ValueError, IndexError):
+                print(f"{Fore.RED}Invalid input. Please enter numbers from the list.{Style.RESET_ALL}")
+        
+        if not selected_indices:
+            logging.warning("No videos selected.")
+            return
+
+        selected_videos = [entries[i] for i in selected_indices]
+        
+        # Use the first selected video to determine the format for all
+        first_video_url = selected_videos[0]['url']
+        logging.info(f"Fetching formats for the first selected video: {selected_videos[0]['title']}")
+        selected_formats = interactive_format_selection(first_video_url)
+
+        if not selected_formats:
+            logging.warning("No format selected. Aborting playlist download.")
+            return
+
+        logging.info(f"Will download {len(selected_videos)} video(s) with format(s): {', '.join(selected_formats)}")
+
+        for i, video in enumerate(selected_videos):
+            logging.info(f"Downloading video {i+1} of {len(selected_videos)}: {video['title']}")
+            for format_code in selected_formats:
+                download_video(video['url'], save_path, format_code)
+
+    except Exception as e:
+        logging.error(f"An error occurred during playlist processing: {e}")
+
+
 def main():
     """Main function to parse arguments and initiate downloads."""
     parser = argparse.ArgumentParser(description="YouTube Downloader", add_help=True)
     parser.add_argument("-u", "--url", required=True, help="YouTube video or playlist URL")
     parser.add_argument("--video", action="store_true", help="Download video")
+    parser.add_argument("--playlist", action="store_true", help="Download videos from a playlist")
     parser.add_argument("--subtitle", action="store_true", help="Download subtitle")
     parser.add_argument("--thumbnail", action="store_true", help="Download thumbnail")
     parser.add_argument("--list-formats", action="store_true", help="List available video formats")
     parser.add_argument("--list-subs", action="store_true", help="List available subtitles")
-    parser.add_argument("--save-dir", default=os.getcwd(), help="Directory to save files")
+    parser.add_argument("--save-dir", default=os.path.expanduser('~/Videos'), help="Directory to save files")
     parser.add_argument("--save-folder", help="Folder to save files in")
     parser.add_argument("--save-sub-lang", default="en", help="Subtitle language(s) to download (comma-separated)")
     parser.add_argument("--sub-style", default="srt", help="Subtitle format (e.g., srt, vtt)")
@@ -246,6 +322,11 @@ def main():
 
     logging.info(f"Checking url: {args.url}")
 
+    save_path = os.path.join(args.save_dir, args.save_folder) if args.save_folder else args.save_dir
+    if not os.path.exists(save_path):
+        os.makedirs(save_path)
+        logging.info(f"Created directory: {save_path}")
+
     if args.list_formats:
         list_formats(args.url)
         return
@@ -254,14 +335,13 @@ def main():
         list_subtitles(args.url)
         return
 
+    if args.playlist:
+        download_playlist(args.url, save_path)
+        return
+
     if not (args.video or args.subtitle or args.thumbnail):
         logging.warning("No download option selected. Use --video, --subtitle, or --thumbnail.")
         return
-
-    save_path = os.path.join(args.save_dir, args.save_folder) if args.save_folder else args.save_dir
-    if not os.path.exists(save_path):
-        os.makedirs(save_path)
-        logging.info(f"Created directory: {save_path}")
 
     if args.video:
         if args.format:
